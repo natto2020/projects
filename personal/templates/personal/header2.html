@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<title>Pre-Alpha Demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;
+padding-bottom: 10px;
+}
+#test1{
+  margin-left: 15%
+}
+.hr{
+  margin-bottom: 10px
+}
+#maintitle{
+  text-align: center;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10px;
+}
+#issue1selector{
+  margin-left: 5%;
+}
+select {
+
+  width: 75%;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  color: gray;
+
+  margin-bottom: 5%;
+
+}
+#issueCore1{
+  color:gray;
+}
+.core1{
+  margin-left: 15%;
+  margin-top: 3%;
+  margin-right: 15%;
+}
+canvas{
+  padding: 25px;
+}
+ul{
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  -webkit-column-gap: 35px; /* Chrome, Safari, Opera */
+  -moz-column-gap: 35px; /* Firefox */
+  column-gap: 35px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 3%;
+  margin-bottom: 5%;
+  list-style-type: none;
+  color:gray;font-size:12px;
+  padding-left: 0.4em;
+
+}
+#checkboxes{
+  margin-right: 5px;
+}
+li{
+  margin-bottom: 3px;
+}
+#uberbutton{
+  margin-top: 5px;
+  margin-bottom: 3%;
+  margin-left: 80%;
+  margin-right:5%;
+}
+</style>
+<body class="w3-light-grey">
+
+  <!-- Page Container -->
+  <div class="w3-content w3-margin-top" style="max-width:1100px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+
+      <!-- Right Column -->
+      <div class="w3-twothird" id="test1">
+
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+          <h2 class="w3-text-grey w3-padding-16" id="maintitle"></i>JurisTech Demo</h2>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Step 1: Auto-Resolution of Dispute</b></h5>
+            <ul>
+              <li>Standard Clause 1: Disabled for Demo</li>
+              <li>Standard Clause 2: Disabled for Demo</li>
+              <li>Standard Clause 3: Disabled for Demo</li>
+              <li>Standard Clause 4: Disabled for Demo</li>
+              <li>Standard Clause 5: Disabled for Demo</li>
+            </ul>
+            <hr>
+          </div>
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Step 2: AI Assisted Resolution</b></h5>
+            <form method="post">
+
+             <div class="container" id="test">
+
+              <div class="row" id="testcontent">
+              </div>
+
+              <hr>
+            </div>
+            <input type="submit" class="btn btn-outline-secondary" value="Submit" id="uberbutton">
+          </form>
+        </div>
+      </div>
+      <!-- End Right Column -->
+    </div>
+
+    <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Demo Mark 1 Pre-Alpha</p>
+</footer>
+<script>
+
+  Chart.pluginService.register({
+    beforeDraw: function (chart) {
+      if (chart.config.options.elements.center) {
+      //Get ctx from string
+      var ctx = chart.chart.ctx;
+
+      //Get options from the center object in options
+      var centerConfig = chart.config.options.elements.center;
+      var fontStyle = centerConfig.fontStyle || 'Arial';
+      var txt = centerConfig.text;
+      var color = centerConfig.color || '#000';
+      var sidePadding = centerConfig.sidePadding || 20;
+      var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
+      //Start with a base font of 30px
+      ctx.font = "30px " + fontStyle;
+
+      //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+      var stringWidth = ctx.measureText(txt).width;
+      var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+      // Find out how much the font can grow in width.
+      var widthRatio = elementWidth / stringWidth;
+      var newFontSize = Math.floor(30 * widthRatio);
+      var elementHeight = (chart.innerRadius * 2);
+
+      // Pick a new font size so it will not be larger than the height of label.
+      var fontSizeToUse = Math.min(newFontSize, elementHeight);
+
+      //Set font settings to draw it correctly.
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+      var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+      ctx.font = fontSizeToUse+"px " + fontStyle;
+      ctx.fillStyle = color;
+
+      //Draw text in center
+      ctx.fillText(txt, centerX, centerY);
+    }
+  }
+});
+  var b = "{{results_list}}";
+  var a = "{{ratios_pie}}";
+  var testdata = JSON.parse(a);
+  var optionSet = []
+  var resulttest = [1,2,3]
+  var test2 = {datasets:[{data: testdata}]};
+  var resolutionList = [];
+  var test = JSON.parse(b);
+  for (var i = 0, j = test.length; i < j; i++) {
+    if(test[i] === 1){
+      resolutionList.push("Full Refund/Exchange & Delivery Cost Borne by Seller");
+    } else if (test[i] === 2){
+      resolutionList.push("Exchange or Refund Offered + Delivery Cost Born by Buyer");
+    } else if (test[i] === 3){
+      resolutionList.push("Refund Only & Delivery Cost Born by Buyer");
+    } else if (test[i] === 4){
+      resolutionList.push("80% Refund + Delivery Cost Borne by Buyer");
+    } else if (test[i] === 5){
+      resolutionList.push("50% Refund + Delivery Cost Borne by Buyer");
+    } else if (test[i] === 6){
+      resolutionList.push("40% Refund + Delivery Cost Borne by Buyer");
+    } else if (test[i] === 7){
+      resolutionList.push("Cancelation of Order + Refund");
+    } else if (test[i] === 8){
+      resolutionList.push("No Refund or Exchange Offered");
+    } }
+
+    for (var i = 0, j = testdata.length; i < j; i++) {
+      $("#testcontent").append("<div class='col-sm-6' id='chartHome" + [i] + "'></div>");
+      $("#chartHome" + [i]).append("<canvas id='chart" + [i] + "'></canvas>" + resolutionList[i]);
+      if(i===1){
+        $("#testcontent").append("<div class='w-100'></div>");
+
+      };
+      this["ctx" + [i]] = document.getElementById("chart" + [i]);
+      var labelCount = i + 1;
+      optionSet.push("Option " + labelCount);
+    }
+
+    for (var i = 0, j = testdata.length; i < j; i++) {
+      var colGraph = [
+      'gray',
+      'gray',
+      'gray',
+      'gray',
+      'gray',
+      'gray',
+      'gray',
+      'gray'];
+
+      colGraph[i] = 'blue';
+
+      var data = {
+        datasets: [{
+          borderWidth: 2,
+          data: testdata,
+          backgroundColor: colGraph
+
+        }],
+        labels: optionSet,
+      };
+
+      new Chart(this["ctx" + [i]], {
+        type: 'doughnut',
+        data: data,
+        options: {
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
+                var label = data.labels[tooltipItem.index];
+                return label;
+              }
+            }},
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: optionSet[i],
+              fontSize: 20
+            },
+            cutoutPercentage: 55,
+            elements: {
+              center: {
+                text: testdata[i] + "%",
+      // color: '#36A2EB', //Default black
+      fontStyle: 'Helvetica', //Default Arial
+      sidePadding: 55 //Default 20 (as a percentage)
+    }
+  },
+
+}
+})
+
+
+    };
+
+
+
+    // var myDoughnutChart = new Chart(ctx2, {
+    //  type: 'doughnut',
+    //  data: test2,
+
+    // });
+
+
+
+    // var myDoughnutChart = new Chart(ctx3, {
+    //  type: 'doughnut',
+    //  data: test2,
+
+    // });
+  </script>
+</body>
+</html>
