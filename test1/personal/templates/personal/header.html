@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<title>Pre-Alpha Demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;
+padding-bottom: 10px;
+}
+#test1{
+	margin-left: 15%
+}
+.hr{
+	margin-bottom: 10px
+}
+#maintitle{
+	text-align: center;
+	margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 10px;
+}
+#issue1selector{
+	margin-left: 5%;
+}
+select {
+
+	width: 75%;
+	border-radius: 4px;
+	background-color: #f1f1f1;
+	color: gray;
+
+	margin-bottom: 5%;
+
+}
+#issueCore1{
+	color:gray;
+}
+.core1{
+	margin-left: 15%;
+	margin-top: 3%;
+	margin-right: 15%;
+}
+ul{
+	-webkit-column-count: 2; /* Chrome, Safari, Opera */
+	-moz-column-count: 2; /* Firefox */
+	column-count: 2;
+	-webkit-column-gap: 35px; /* Chrome, Safari, Opera */
+	-moz-column-gap: 35px; /* Firefox */
+	column-gap: 35px;
+	margin-left: 15%;
+	margin-right: 15%;
+	margin-top: 3%;
+	margin-bottom: 5%;
+	list-style-type: none;
+	color:gray;font-size:12px;
+	padding-left: 0.4em;
+
+}
+#checkboxes{
+	margin-right: 5px;
+}
+li{
+	margin-bottom: 3px;
+}
+#uberbutton{
+	margin-top: 5px;
+	margin-bottom: 3%;
+	margin-left: 80%;
+	margin-right:5%;
+}
+</style>
+<body class="w3-light-grey">
+
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width:1100px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Right Column -->
+			<div class="w3-twothird" id="test1">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16" id="maintitle"></i>JurisTech Demo</h2>
+					<div class="w3-container">
+						<h5 class="w3-opacity"><b>Sales Data - Auto-Generated for Demo</b></h5>
+						<ul>
+							<li>Clothing Type: One Piece</li>
+							<li>Item #: WH12345678</li>
+							<li>Cost: $500</li>
+							<li>Date of Delivery: 15/12/2018</li>
+							<li>Ref #: A982342</li>
+						</ul>
+						<hr>
+					</div>
+					<div class="w3-container">
+						<h5 class="w3-opacity"><b>Input Cause for the Return</b></h5>
+						<form method="post">
+
+							{% csrf_token %}
+
+							<div class="core1">
+								<span id="issueCore1">Issue 1:</span> <select name="group for cause of action" id="issue1selector" required>
+									<option value="" selected disabled hidden>Click here for a list of Issues</option>
+									<option value="Defect is Buyer's Fault">Would you like to request a new size?</option>
+									<option value="Defect is Buyer's Fault">Would you like to request a different color?</option>
+									<option value="Defects in goods">Was there a defect in the product upon delivery?</option>
+									<option value="Imitation, pirated">Was the item an imitation/knockoff?</option>
+									<option value="Delivered wrong goods">Were the wrong goods delivered?</option>
+									<option value="Delivered wrong number">Were the wrong number of goods delivered?</option>
+									<option value="Fault on Seller's part in general">Was the seller at fault for some misc reason?</option>
+								</select>
+							</div>
+
+							<hr>
+						</div>
+						<div class="w3-container">
+							<h5 class="w3-opacity"><b>Please Select All that Apply</b></h5>
+
+							<input type="hidden" name="v1" value="0">
+							<input type="hidden" name="v2" value="0">
+							<input type="hidden" name="v3" value="0">
+							<input type="hidden" name="v4" value="0">
+							<input type="hidden" name="v5" value="0">
+							<input type="hidden" name="v6" value="0">
+							<ul>
+								<label class="checkbox"><input type="checkbox" name="v1" value="1" id="checkboxes">Has the Item been used?</label>
+								<label class="checkbox"><input type="checkbox" name="v2" value="1" id="checkboxes">Is the item damaged in any way?</label>
+								<label class="checkbox"><input type="checkbox" name="v3" value="1" id="checkboxes">Was there a no-return sitpulation?</label>
+								<label class="checkbox"><input type="checkbox" name="v4" value="1" id="checkboxes">Has the invoice/receipt been lost?</label>
+								<label class="checkbox"><input type="checkbox" name="v5" value="1" id="checkboxes">Has the tag been lost?</label>
+								<label class="checkbox"><input type="checkbox" name="v6" value="1" id="checkboxes">Is the original packing damaged?</label>
+
+							</ul>
+							<hr>
+						</div>
+						<input type="submit" class="btn btn-outline-secondary" value="Submit" id="uberbutton">
+					</form>
+				</div>
+			</div>
+			<!-- End Right Column -->
+		</div>
+
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+</div>
+
+<!-- <footer class="w3-container w3-teal w3-center w3-margin-top">
+	<p>Demo Mark 1 Pre-Alpha</p>
+</footer> -->
+</body>
+</html>
+
+
+
+
+
+
+<!--
+<canvas id="myDoughnutChart" width="50" height="50"></canvas>
+
+<script type="text/javascript">
+var a = "{{ratios_pie}}";
+// #alert(a);
+pie_Ratio = JSON.parse(a);
+
+
+alert(pie_Ratio);
+</script>
+
+<div>
+<canvas id="myDoughnutChart" width="50" height="50"></canvas>
+</div>
+<script>
+
+
+
+
+var ctx = document.getElementById("myDoughnutChart");
+
+
+data = {
+datasets: [{
+data: pie_Ratio
+}],
+
+// These labels appear in the legend and in the tooltips when hovering different arcs
+labels: [
+'Red',
+'Yellow',
+'Blue'
+]
+};
+
+var myDoughnutChart = new Chart(ctx, {
+type: 'doughnut',
+data: data,
+});
+</script> -->
