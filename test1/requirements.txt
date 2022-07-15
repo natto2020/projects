@@ -43,7 +43,7 @@ dask==0.15.3
 datashape==0.5.4
 decorator==4.1.2
 dill==0.2.7.1
-distributed==1.19.1
+distributed==2021.10.0
 Django==2.0.2
 dockerpty==0.4.1
 docopt==0.6.2
